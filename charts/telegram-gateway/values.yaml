@@ -17,7 +17,6 @@ cluster:
 
 service:
   type: ClusterIP
-  name: telegram-gateway
 
 urls:
   alertmanager: "https://test"
