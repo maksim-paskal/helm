@@ -11,6 +11,10 @@ telegram:
 cluster:
   name: ""
 
+service:
+  type: ClusterIP
+  name: telegram-gateway
+
 urls:
   alertmanager: "https://test"
   prometheus: "https://test"

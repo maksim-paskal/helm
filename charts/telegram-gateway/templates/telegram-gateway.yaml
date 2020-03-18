@@ -37,11 +37,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: telegram-gateway
+  name: {{ .Values.service.name | quote }}
   labels:
     app: telegram-gateway
 spec:
-  type: ClusterIP
+  type: {{ .Values.service.type | quote }}
   ports:
   - port: 9090
     protocol: TCP
