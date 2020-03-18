@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: telegram-gateway
+  name: {{ .Chart.Name | quote }}
   labels:
-    app: telegram-gateway
+    app: {{ .Chart.Name | quote }}
 spec:
   selector:
     matchLabels:
-      app: telegram-gateway
+      app: {{ .Chart.Name | quote }}
   replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
-        app: telegram-gateway
+        app: {{ .Chart.Name | quote }}
         chart-version: {{ .Chart.Version | quote }}
     spec:
       containers:
@@ -39,11 +39,11 @@ kind: Service
 metadata:
   name: {{ .Values.service.name | quote }}
   labels:
-    app: telegram-gateway
+    app: {{ .Chart.Name | quote }}
 spec:
   type: {{ .Values.service.type | quote }}
   ports:
   - port: 9090
     protocol: TCP
   selector:
-    app: telegram-gateway
+    app: {{ .Chart.Name | quote }}
