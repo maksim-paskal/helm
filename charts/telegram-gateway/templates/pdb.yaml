@@ -1,0 +1,9 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: telegram-gateway
+spec:
+  minAvailable: {{ .Values.pdb.minAvailable | quote }}
+  selector:
+    matchLabels:
+      app: telegram-gateway

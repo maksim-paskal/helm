@@ -2,7 +2,11 @@ registry:
   image: paskalmaksim/telegram-gateway:1.0.2
   imagePullPolicy: IfNotPresent
 
-replicas: 1
+replicas: 2
+
+pdb:
+  enabled: true
+  minAvailable: 1
 
 telegram:
   token: "1072104160:AAH2sFpHELeH5oxMmd-tsVjgTuzoYO6hSLM"
