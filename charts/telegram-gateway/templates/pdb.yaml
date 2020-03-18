@@ -3,7 +3,7 @@ kind: PodDisruptionBudget
 metadata:
   name: telegram-gateway
 spec:
-  minAvailable: {{ .Values.pdb.minAvailable | quote }}
+  minAvailable: {{ int .Values.pdb.minAvailable | quote }}
   selector:
     matchLabels:
       app: telegram-gateway
