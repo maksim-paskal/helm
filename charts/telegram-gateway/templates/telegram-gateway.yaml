@@ -1,4 +1,5 @@
-{{- range $index,$telegram := .Values.telegram -}}
+{{- range $index,$telegram := .Values.telegram }}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -61,4 +62,4 @@ spec:
     matchLabels:
       app: {{ .name | quote }}
 {{- end }}
-{{- end -}}
+{{- end }}
