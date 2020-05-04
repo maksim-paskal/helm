@@ -1,5 +1,5 @@
 registry:
-  image: paskalmaksim/telegram-gateway:1.0.2
+  image: paskalmaksim/telegram-gateway:1.0.3
   imagePullPolicy: IfNotPresent
 
 replicas: 2
@@ -9,18 +9,16 @@ pdb:
   minAvailable: 1
 
 telegram:
+- name: "telegram-gateway"
+  cluster_name: "dev"
   token: "1072104160:AAH2sFpHELeH5oxMmd-tsVjgTuzoYO6hSLM"
-  id: "-479832859"
-
-cluster:
-  name: ""
+  chat_id: "-479832859"
+  urls:
+    alertmanager: "https://test"
+    prometheus: "https://test"
 
 service:
   type: ClusterIP
-
-urls:
-  alertmanager: "https://test"
-  prometheus: "https://test"
 
 resources:
   requests:

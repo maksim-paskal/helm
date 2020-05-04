@@ -1,49 +1,64 @@
+{{- range $index,$telegram := .Values.telegram -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name | quote }}
+  name: {{ .name | quote }}
   labels:
-    app: {{ .Release.Name | quote }}
+    app: {{ .name | quote }}
 spec:
   selector:
     matchLabels:
-      app: {{ .Release.Name | quote }}
-  replicas: {{ .Values.replicas }}
+      app: {{ .name | quote }}
+  replicas: {{ $.Values.replicas }}
   template:
     metadata:
       labels:
-        app: {{ .Release.Name | quote }}
-        chart-version: {{ .Chart.Version | quote }}
+        app: {{ .name | quote }}
+        chart-version: {{ $.Chart.Version | quote }}
     spec:
       containers:
       - name: telegram-gateway
         resources:
-{{ toYaml .Values.resources | indent 9 }}
-        image: {{ .Values.registry.image }}
-        imagePullPolicy: {{ .Values.registry.imagePullPolicy }}
+{{ toYaml $.Values.resources | indent 9 }}
+        image: {{ $.Values.registry.image }}
+        imagePullPolicy: {{ $.Values.registry.imagePullPolicy }}
         command:
         - telegram-gateway
-        - --alertmanager.url={{ .Values.urls.alertmanager }}
-        - --prometheus.url={{ .Values.urls.prometheus }}
-        - --cluster.name={{ .Values.cluster.name }}
+        - --alertmanager.url={{ .urls.alertmanager }}
+        - --prometheus.url={{ .urls.prometheus }}
+        - --cluster.name={{ .cluster_name }}
         env:
         - name: "CHAT_TOKEN"
-          value: {{ .Values.telegram.token | quote }}
+          value: {{ .token | quote }}
         - name: "CHAT_ID"
-          value: {{ int .Values.telegram.id | quote }}
+          value: {{ int .chat_id | quote }}
         ports:
         - containerPort: 9090
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name | quote }}
+  name: {{ .name | quote }}
   labels:
-    app: {{ .Release.Name | quote }}
+    app: {{ .name | quote }}
+    chart-version: {{ $.Chart.Version | quote }}
 spec:
-  type: {{ .Values.service.type | quote }}
+  type: {{ $.Values.service.type | quote }}
   ports:
   - port: 9090
     protocol: TCP
   selector:
-    app: {{ .Release.Name | quote }}
+    app: {{ .name | quote }}
+---
+{{- if $.Values.pdb.enabled }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ .name | quote }}
+spec:
+  minAvailable: {{ $.Values.pdb.minAvailable }}
+  selector:
+    matchLabels:
+      app: {{ .name | quote }}
+{{- end }}
+{{- end -}}
