@@ -2,8 +2,8 @@ apiVersion: v1
 entries:
   ingress-default-backend:
   - apiVersion: v1
-    created: "2020-12-18T09:56:17.013286+02:00"
-    digest: 0d18078f48924acbefdd46d0ee4a52626adf347c1befca3bc7bd1d36890eff03
+    created: "2020-12-18T10:13:49.647441+02:00"
+    digest: 36d4cb9719c6bf827e7b95f82875b783b462574cc384f8f22e2ce8204c6376bf
     icon: https://helm.sh/img/helm.svg
     name: ingress-default-backend
     urls:
@@ -11,17 +11,17 @@ entries:
     version: 1.0.0
   telegram-gateway:
   - apiVersion: v1
-    created: "2020-12-18T09:56:17.014033+02:00"
-    digest: bf6eb96bb744ac0595cdce12124139d8dc174d82e9c4bf60dfbc8e9c95346a06
+    created: "2020-12-18T10:13:49.648157+02:00"
+    digest: 8f0cf327fe2cfafa39028380335be43d493c89b65e265511f7a348d5bdd49a9b
     icon: https://helm.sh/img/helm.svg
     name: telegram-gateway
     urls:
     - https://github.com/maksim-paskal/helm/releases/download/1.0/telegram-gateway-1.0.2.tgz
     version: 1.0.2
-  - created: "2020-12-18T09:56:17.013819+02:00"
+  - created: "2020-12-18T10:13:49.647949+02:00"
     digest: cc27598673dbbabec1805176099fe696cd389ca8d8bddda2bba59e4bc9e8d08a
     name: telegram-gateway
     urls:
     - https://github.com/maksim-paskal/helm/releases/download/1.0/telegram-gateway-1.0.1.tgz
     version: 1.0.1
-generated: "2020-12-18T09:56:17.012829+02:00"
+generated: "2020-12-18T10:13:49.647001+02:00"

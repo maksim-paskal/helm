@@ -16,7 +16,7 @@ spec:
 {{ toYaml .Values.affinity | indent 7 }}
       containers:
       - name: ingress-default-backend
-        image: {{ .Values.image }}{{ .Values.tag }}
+        image: "{{ .Values.image }}:{{ .Values.tag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy }}
         resources:
 {{ toYaml .Values.resources | indent 9 }}
