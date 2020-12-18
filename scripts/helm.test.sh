@@ -6,5 +6,5 @@ do
   repo=`dirname $repoDir`
   echo check $repo...
   helm lint --strict $repo
-  helm template $repo | kubectl apply --dry-run -f -
+  helm template $repo | kubectl apply --dry-run=client --validate=true -f -
 done
