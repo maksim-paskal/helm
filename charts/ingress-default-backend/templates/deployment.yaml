@@ -12,17 +12,21 @@ spec:
       labels:
         app: ingress-default-backend
     spec:
+      topologySpreadConstraints:
+{{ toYaml .Values.topologySpreadConstraints | indent 7 }}
       affinity:
 {{ toYaml .Values.affinity | indent 7 }}
       containers:
       - name: ingress-default-backend
         image: "{{ .Values.image }}:{{ .Values.tag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy }}
+        command:
+        - /app/ingress-default-backend
+{{- if .Values.args }}
+{{ toYaml .Values.args | indent 8 }}
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 9 }}
-        env:
-        - name: ERROR_GENERATOR_PATH
-          value: "/errorGenerator"
         readinessProbe:
           httpGet:
             path: /healthz

@@ -1,6 +1,6 @@
 replicas: 2
 
-tag: v0.0.2.1
+tag: v0.0.4
 
 image: paskalmaksim/ingress-default-backend
 imagePullPolicy: IfNotPresent
@@ -8,10 +8,20 @@ imagePullPolicy: IfNotPresent
 pdb:
   minAvailable: 1
 
+args: []
+
 resources:
   requests:
     cpu: 10m  
     memory: 100Mi
+
+topologySpreadConstraints:
+- maxSkew: 1
+  topologyKey: topology.kubernetes.io/zone
+  whenUnsatisfiable: DoNotSchedule
+  labelSelector:
+    matchLabels:
+      app: ingress-default-backend
 
 affinity:
   podAntiAffinity:
@@ -23,13 +33,3 @@ affinity:
           values:
           - ingress-default-backend
       topologyKey: kubernetes.io/hostname
-    preferredDuringSchedulingIgnoredDuringExecution:
-    - podAffinityTerm:
-        labelSelector:
-          matchExpressions:
-          - key: app
-            operator: In
-            values:
-            - ingress-default-backend
-        topologyKey: topology.kubernetes.io/zone
-      weight: 100
