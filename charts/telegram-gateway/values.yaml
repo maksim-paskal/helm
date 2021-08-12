@@ -1,5 +1,5 @@
 registry:
-  image: paskalmaksim/telegram-gateway:1.0.5
+  image: paskalmaksim/telegram-gateway:v1.0.6
   imagePullPolicy: IfNotPresent
 
 replicas: 2
@@ -7,9 +7,9 @@ replicas: 2
 config:
   defaults:
     token: 1072104160:AAH2sFpHELeH5oxMmd-tsVjgTuzoYO6hSLM
-    extraLabels:
-    - name: Cluster
-      value: "someDev"
+    extraLabels: []
+    # - name: Cluster
+    #   value: "someDev"
     sentryButtons:
     - name: Logs
       value: "https://test.com"
